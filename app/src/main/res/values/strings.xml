@@ -29,5 +29,15 @@
         <item>Shopping</item>
         <item>Hospitals</item>
     </string-array>
+    <string name="shortcut_call_police">Call Police</string>
+    <string name="shortcut_call_police_long">Emergency: Call the Police</string>
+
+    <string name="shortcut_call_ambulance">Call Ambulance</string>
+    <string name="shortcut_call_ambulance_long">Emergency: Call the Ambulance</string>
+
+    <string name="shortcut_view_contacts">View Emergency Contacts</string>
+    <string name="shortcut_view_contacts_long">View Emergency Contacts</string>
+
+
 
 </resources>

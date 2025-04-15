@@ -63,12 +63,12 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Content area with place details -->
+    <!-- Main content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="16dp"
+        android:paddingBottom="80dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -80,9 +80,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_margin="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
@@ -96,6 +94,7 @@
                         android:id="@+id/place_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="Name"
                         android:textColor="#2C3E50"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -105,12 +104,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:text="Category"
                         android:textColor="#7F8C8D"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Location and distance info - Fixed XML structure -->
+            <!-- Address and distance -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Address &amp; Distance"
+                        android:text="Address and Distance"
                         android:textColor="#2C3E50"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -141,6 +141,7 @@
                         android:layout_marginTop="8dp"
                         android:drawableStart="@drawable/ic_location"
                         android:drawablePadding="8dp"
+                        android:text="Location"
                         android:textColor="#34495E"
                         android:textSize="16sp" />
 
@@ -151,12 +152,13 @@
                         android:layout_marginTop="8dp"
                         android:drawableStart="@drawable/ic_distance"
                         android:drawablePadding="8dp"
+                        android:text="Distance"
                         android:textColor="#34495E"
                         android:textSize="16sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Phone and call action -->
+            <!-- Contact section -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,6 +189,7 @@
                         android:layout_marginTop="8dp"
                         android:drawableStart="@drawable/ic_phone"
                         android:drawablePadding="8dp"
+                        android:text="Phone number"
                         android:textColor="#34495E"
                         android:textSize="16sp" />
 
@@ -198,10 +201,7 @@
                         android:backgroundTint="#27AE60"
                         android:drawableStart="@drawable/ic_call"
                         android:drawablePadding="8dp"
-                        android:paddingStart="24dp"
-                        android:paddingTop="12dp"
-                        android:paddingEnd="24dp"
-                        android:paddingBottom="12dp"
+                        android:padding="12dp"
                         android:text="Call This Place"
                         android:textColor="#FFFFFF" />
                 </LinearLayout>
@@ -211,10 +211,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="2dp">
 
@@ -251,7 +248,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Added missing Search Button -->
+    <!-- Floating Search Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
@@ -264,4 +261,17 @@
         app:layout_anchorGravity="bottom|end"
         app:tint="#FFFFFF" />
 
+    <!-- Voice Command Button -->
+    <Button
+        android:id="@+id/voice_command_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        android:backgroundTint="#E74C3C"
+        android:text="Speak to Call Emergency"
+        android:textColor="#FFFFFF"
+        android:drawableStart="@drawable/ic_mic"
+        android:drawablePadding="8dp"
+        android:padding="12dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

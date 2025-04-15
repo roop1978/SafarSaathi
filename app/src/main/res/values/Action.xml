@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="open_app">Open Safe</string>
-    <string name="get_emergency_info">Find emergency services with SafarSaathi</string>
-    <string name="search_places">Search for places nearby with SafarSaathi</string>
-    <string name="view_profile">View my SafarSaathi profile</string>
-    <string name="get_emergency_contacts">Find emergency contacts in SafarSaathi</string>
-</resources>

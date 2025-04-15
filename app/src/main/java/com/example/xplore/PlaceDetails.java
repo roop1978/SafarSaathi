@@ -2,11 +2,12 @@ package com.example.xplore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
+import android.util.Log;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,9 +30,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.speech.RecognitionListener;
+import java.util.Locale;
 
 public class PlaceDetails extends AppCompatActivity {
     private static final String TAG = "PlaceDetails";
+    private SpeechRecognizer speechRecognizer;
+    private static final int VOICE_RECOGNITION_REQUEST_CODE = 1;
 
     // UI Components
     private TextView placeName, placeCategory, placeLocation, placeDistance, placePhone;
@@ -42,7 +49,6 @@ public class PlaceDetails extends AppCompatActivity {
     // Data variables
     private String email;
     private long phoneNumber;
-
     private double latitude, longitude;
     private String distance;
 
@@ -64,6 +70,58 @@ public class PlaceDetails extends AppCompatActivity {
         search = findViewById(R.id.searchButton);
         profile = findViewById(R.id.profileButton);
 
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        speechRecognizer.setRecognitionListener(new RecognitionListener() {
+            @Override
+            public void onResults(Bundle results) {
+                ArrayList<String> recognizedWords = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+                if (recognizedWords != null) {
+                    String command = recognizedWords.get(0).toLowerCase();
+                    if (command.contains("police")) {
+                        callEmergency("police");
+                    } else if (command.contains("ambulance")) {
+                        callEmergency("ambulance");
+                    }
+                }
+            }
+
+            @Override
+            public void onReadyForSpeech(Bundle params) {}
+            @Override
+            public void onBeginningOfSpeech() {}
+            @Override
+            public void onRmsChanged(float rmsdB) {}
+            @Override
+            public void onBufferReceived(byte[] buffer) {}
+            @Override
+            public void onEndOfSpeech() {}
+            @Override
+            public void onError(int error) {}
+            @Override
+            public void onPartialResults(Bundle partialResults) {}
+            @Override
+            public void onEvent(int eventType, Bundle params) {}
+        });
+
+        // Voice command button click
+        Button voiceButton = findViewById(R.id.voice_command_button);
+        voiceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                        RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak your emergency command...");
+
+                try {
+                    startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(PlaceDetails.this, "Your device doesn't support speech input", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         // Get data from intent
         Intent intent = getIntent();
         email = intent.getStringExtra("email");
@@ -73,30 +131,35 @@ public class PlaceDetails extends AppCompatActivity {
         longitude = intent.getDoubleExtra("longitude", 0);
 
         if (distance != null) {
-            placeDistance.setText("Distance: " + Double.parseDouble(distance)/1000 + " km");
+            placeDistance.setText("Distance: " + Double.parseDouble(distance) / 1000 + " km");
         }
 
         // Setup navigation
         setupNavigation();
 
-
-
-
-
         // Populate place details and reviews
         populateDetails(fsq_id);
         populateReviews(fsq_id);
+
+        String emergencyType = intent.getStringExtra("emergency_type");
+        if (emergencyType != null) {
+            if (emergencyType.equals("police")) {
+                dialPhoneNumber("100");
+            } else if (emergencyType.equals("ambulance")) {
+                dialPhoneNumber("102");
+            }
+        }
     }
 
     private void setupNavigation() {
-        // Home button now navigates to places nearby (LandingPage)
+        // Home button navigates to places nearby (LandingPage)
         home.setOnClickListener(v -> {
             Intent homeIntent = new Intent(PlaceDetails.this, LandingPage.class);
             homeIntent.putExtra("email", email);
             startActivity(homeIntent);
         });
 
-        // Search button now navigates to emergency contacts (SearchPlaces)
+        // Search button navigates to emergency contacts (SearchPlaces)
         search.setOnClickListener(v -> {
             Intent searchIntent = new Intent(PlaceDetails.this, SearchPlaces.class);
             searchIntent.putExtra("email", email);
@@ -150,9 +213,6 @@ public class PlaceDetails extends AppCompatActivity {
                         callButton.setEnabled(true);
 
                         callButton.setOnClickListener(v -> dialPhoneNumber("08202923188"));
-
-
-
 
                         Log.d(TAG, "Full Foursquare response: " + response.toString());
 
@@ -234,7 +294,35 @@ public class PlaceDetails extends AppCompatActivity {
     private void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
-        startActivity(intent);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
+    private void callEmergency(String emergencyType) {
+        String phoneNumber = "";
+
+        if (emergencyType.equals("police")) {
+            phoneNumber = "100"; // Police number
+        } else if (emergencyType.equals("ambulance")) {
+            phoneNumber = "102"; // Ambulance number
+        }
+
+        if (!phoneNumber.isEmpty()) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + phoneNumber)); // Using tel: to trigger the phone dialer
+            startActivity(intent); // This will launch the dialer with the number pre-filled
+        } else {
+            Toast.makeText(this, "Emergency number not available", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (speechRecognizer != null) {
+            speechRecognizer.destroy();
+        }
+    }
 }

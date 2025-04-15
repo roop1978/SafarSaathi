@@ -1,54 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
 <shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Open app capability -->
-    <capability android:name="actions.intent.OPEN_APP">
+    <!-- Shortcut for calling Police -->
+    <shortcut
+        android:shortcutId="call_police"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/shortcut_call_police"
+        android:shortcutLongLabel="@string/shortcut_call_police_long"
+        android:icon="@drawable/ic_police">
         <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.xplore"
-            android:targetClass="com.example.xplore.MainActivity" />
-    </capability>
+            android:action="android.intent.action.CALL"
+            android:data="tel:100" /> <!-- Directly call the police number -->
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
 
-    <!-- Emergency information capability -->
-    <capability android:name="actions.intent.GET_EMERGENCY_INFO">
+    <!-- Shortcut for calling Ambulance -->
+    <shortcut
+        android:shortcutId="call_ambulance"
+        android:enabled="true"
+        android:shortcutShortLabel="@string/shortcut_call_ambulance"
+        android:shortcutLongLabel="@string/shortcut_call_ambulance_long"
+        android:icon="@drawable/ic_ambulance">
         <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.xplore"
-            android:targetClass="com.example.xplore.LandingPage" />
-    </capability>
-
-    <!-- Search for places nearby capability -->
-    <capability android:name="actions.intent.SEARCH_PLACES_NEARBY">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.xplore"
-            android:targetClass="com.example.xplore.SearchPlaces">
-            <parameter
-                android:name="query"
-                android:key="query" />
-        </intent>
-    </capability>
-
-    <!-- View user profile capability -->
-    <capability android:name="actions.intent.VIEW_PROFILE">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.xplore"
-            android:targetClass="com.example.xplore.Profile">
-            <parameter
-                android:name="email"
-                android:key="email" />
-        </intent>
-    </capability>
-
-    <!-- Get location-specific emergency contacts capability -->
-    <capability android:name="actions.intent.GET_EMERGENCY_CONTACTS">
-        <intent
-            android:action="android.intent.action.VIEW"
-            android:targetPackage="com.example.xplore"
-            android:targetClass="com.example.xplore.LandingPage">
-            <parameter
-                android:name="filter"
-                android:key="filter" />
-        </intent>
-    </capability>
+            android:action="android.intent.action.CALL"
+            android:data="tel:102" /> <!-- Directly call the ambulance number -->
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
 </shortcuts>
