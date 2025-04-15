@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">SafarSaathi</string>
+    <string name="puppets">puppets</string>
+    <string name="log_in">Log In</string>
+    <string name="enter_password">Enter Password:</string>
+    <string name="enter_email_id">Enter Email ID:</string>
+    <string name="password">Password</string>
+    <string name="new_to_the_app">New to the app?</string>
+    <string name="register_here">Register Here</string>
+    <string name="email">email</string>
+    <string name="email_id">Email ID</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="password_">Password:</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="_password">Password</string>
+    <string name="mobile">Mobile:</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="full_name">Full Name:</string>
+    <string name="email_id_">Email ID:</string>
+    <string name="full_name_">Full Name</string>
+    <string name="email_id__">Email ID</string>
+    <string name="register_account">Register Account</string>
+    <string name="login_here">Login Here</string>
+    <string-array name="place_categories">
+        <item>Temples</item>
+        <item>Hotels</item>
+        <item>Cafe</item>
+        <item>Parks</item>
+        <item>Shopping</item>
+        <item>Hospitals</item>
+    </string-array>
+
+</resources>

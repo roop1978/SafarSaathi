@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Open app capability -->
+    <capability android:name="actions.intent.OPEN_APP">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.xplore"
+            android:targetClass="com.example.xplore.MainActivity" />
+    </capability>
+
+    <!-- Emergency information capability -->
+    <capability android:name="actions.intent.GET_EMERGENCY_INFO">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.xplore"
+            android:targetClass="com.example.xplore.LandingPage" />
+    </capability>
+
+    <!-- Search for places nearby capability -->
+    <capability android:name="actions.intent.SEARCH_PLACES_NEARBY">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.xplore"
+            android:targetClass="com.example.xplore.SearchPlaces">
+            <parameter
+                android:name="query"
+                android:key="query" />
+        </intent>
+    </capability>
+
+    <!-- View user profile capability -->
+    <capability android:name="actions.intent.VIEW_PROFILE">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.xplore"
+            android:targetClass="com.example.xplore.Profile">
+            <parameter
+                android:name="email"
+                android:key="email" />
+        </intent>
+    </capability>
+
+    <!-- Get location-specific emergency contacts capability -->
+    <capability android:name="actions.intent.GET_EMERGENCY_CONTACTS">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.xplore"
+            android:targetClass="com.example.xplore.LandingPage">
+            <parameter
+                android:name="filter"
+                android:key="filter" />
+        </intent>
+    </capability>
+</shortcuts>

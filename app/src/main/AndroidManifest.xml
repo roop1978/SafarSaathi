@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@drawable/pngtree_indian_man_with_turban_rajasthani_men_welcome_namaste_greetings_png_image_6119228_removebg_preview"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/pngtree_indian_man_with_turban_rajasthani_men_welcome_namaste_greetings_png_image_6119228_removebg_preview"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Xplore"
+        tools:targetApi="31">
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".PlaceDetails"
+            android:exported="false" />
+        <activity
+            android:name=".SearchPlaces"
+            android:exported="false" />
+        <activity
+            android:name=".feedback"
+            android:exported="false" />
+        <activity
+            android:name=".LandingPage"
+            android:launchMode="singleTop"
+            android:clearTaskOnLaunch="true">
+        </activity>
+        <activity
+            android:name=".signup"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".login"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+
+        <meta-data
+            android:name="android.app.shortcuts"
+            android:resource="@xml/shortcuts" />
+
+
+
+    </application>
+
+</manifest>
